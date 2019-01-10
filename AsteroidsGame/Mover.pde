@@ -67,13 +67,34 @@ interface Movable {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  Abstract base class Mover 
  */
-abstract class Mover {// implements Movable {
+abstract class Mover implements Movable {
 
   protected float x, y;
   protected float speed;
   protected float direction;
   protected int myColor;
-  protected float radius;  
+  protected float radius; 
+  float getX(){
+    return x;
+  }
+  float getY(){
+    return y;
+  }
+  float getDirection(){
+    return  direction;
+  }
+  float getSpeed(){
+    return speed;
+  }
+  float getRadius(){
+    return radius;
+  }
+  void setDirection(float newDirectionInDegrees){
+    this.direction = newDirectionInDegrees;
+  }
+  void setSpeed(float newSpeed){
+    this.speed = newSpeed;
+  }
 
   /*
     Default Mover, not actually moving and directionless
@@ -101,14 +122,20 @@ abstract class Mover {// implements Movable {
     Most of your movalbe objects should follow this pattern.
    */
   void update() {
-    x = x + speed*(float)Math.cos(radians(direction));
+    x = x + speed*(float)Math.cos(radians(direction +50));
     y = y + speed*(float)Math.sin(radians(direction));
-
-    //todo: You need to decide what to do when X is less than 0 or greater than width
-    //todo: You need to decide what to do when Y is less than 0 or greater than height
+    
+    
+   if (x<0 || x>width){    //todo: You need to decide what to do when X is less than 0 or greater than width
+     speed = 2;
+   }
+   if (y <0 || y > height){ //todo: You need to decide what to do when Y is less than 0 or greater than height
+     direction+=1;
+     speed = 2;
+   }
+   
+   
   }
-
-
 
   /*
     Save this for your subclasses to override.
@@ -125,5 +152,4 @@ abstract class Mover {// implements Movable {
      return false; 
   }
   
-  //TODO: Part I: implement the methods of Moveable interface - delete this comment
 }
