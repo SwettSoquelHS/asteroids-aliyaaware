@@ -95,6 +95,13 @@ abstract class Mover implements Movable {
   void setSpeed(float newSpeed){
     this.speed = newSpeed;
   }
+  void setX(float x_pos){
+    x = x_pos;
+  }
+  
+  void setY(float y_pos){
+    y = y_pos;
+  }
 
   /*
     Default Mover, not actually moving and directionless
@@ -122,7 +129,7 @@ abstract class Mover implements Movable {
     Most of your movalbe objects should follow this pattern.
    */
   void update() {
-    x = x + speed*(float)Math.cos(radians(direction +50));
+    x = x + speed*(float)Math.cos(radians(direction));
     y = y + speed*(float)Math.sin(radians(direction));
     
     

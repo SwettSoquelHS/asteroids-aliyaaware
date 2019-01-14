@@ -8,44 +8,59 @@
 */
 class Asteroid extends Mover {   
   //your code here
-  float x, y, speed;
-  PVector location, velocity;
-  float direction = 1;
+  float rotate;
+  float[] xCoords = new float[5];
+  float[] yCoords = new float[5];
+  //float x_pos, y, speed;
+  //float direction = -1.0;
+
   
-  Asteroid(float x, float y, float speed, float direction){
+  public Asteroid(float x, float y, float speed, float direction){
     super(x, y, speed, direction);
-     location = new PVector(x, y);
-    velocity = new PVector(speed*(float)Math.cos(radians(direction)), 
-      speed*(float)Math.sin(radians(direction)));
-    this.speed = speed;
-    this.direction = direction;
     
   }
+  Asteroid(float x, float y){
+  super(x,y);
+  }
+  
   void show(){
+    pushMatrix();
+    translate(x, y);
+    rotate(radians(rotate));
+    scale(5.0);
     fill(100);
-    ellipse(location.x,location.y,10,10);
+    beginShape();
+    vertex(5.0, 0.0);
+    vertex(0.0, 8.0);
+    vertex(-5.0, 0.0);
+    vertex(-5.0, 5.0);
+    endShape();
+    popMatrix();
   }
   
   void move(){
-   // x = x+(int)Math.random()*3;
-    //y = y+(int)Math.random()*3;
-    //location.x += velocity.x; //update x and y
-    //location.y += velocity.y;
-    //velocity.x = (speed*(float)Math.cos(radians(direction))); //update direction
-    //velocity.y = (speed*(float)Math.sin(radians(direction)));
+   x = x+(int)Math.random();
+   y = y+(int)Math.random();
     
-    //System.out.println(direction);
-    if (location.x > width || location.x < 0
-      || location.y > height || location.y < 0) {
-        //direction -= random(160, 190);
+    if (x > width || x < 0
+      ||y > height || y < 0) {
+        direction -= random(160, 190);
         direction *= -1;
     }
-    if ( x_pos <= 0) {
-      direction = y_pos*-1;
+    if ( x <= 0) {
+      direction = y*-1;
     }
-    if (x_pos >= 1000) {
-      direction = y_pos +1;
+    if (x >= 1000) {
+      direction = y +1;
+    }
+    if (y >= 800 || y <= 0) {
+      direction = direction*-1;      
     }
 
+  }
+  void update(){
+    x = x+ speed*(float)Math.cos(radians(direction));
+    y = y + speed*(float)Math.sin(radians(direction));
+    rotate += 2;
   }
 }

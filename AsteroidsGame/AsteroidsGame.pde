@@ -4,8 +4,8 @@
 float x_pos, y_pos, speed, direction;
 
 Spaceship player1;
-Asteroid[] asteroids= new Asteroid[50];
-Star[] starField = new Star[1000];
+Asteroid[] asteroids= new Asteroid[20];
+Star[] starField = new Star[100];
 
 
 /*
@@ -23,29 +23,25 @@ boolean SPACE_BAR;    //User is pressing space bar
  */
 public void setup() {
   size(1000,800);
-   ROTATE_LEFT = false;  //User is pressing <-
-   ROTATE_RIGHT = false; //User is pressing ->
-   MOVE_FORWARD = false; //User is pressing ^ arrow
+   ROTATE_LEFT = false;  
+   ROTATE_RIGHT = false;
+   MOVE_FORWARD = false; 
    SPACE_BAR = false; 
   
   x_pos = width/23.0;
   y_pos= height/3.0;
   
   for (int i =0; i<starField.length; i++){
-    x_pos = random (0, width);
-    y_pos = random (0, height);
-    speed = random(0.5, 1);
-    direction = random(0, 360);
+    //x_pos = random (0, width);
+    //y_pos = random (0, height);
+    //speed = random(0.5, 1);
+    //direction = random(0, 360);
     starField[i] = new Star(x_pos, y_pos, speed, direction);
   }
   
   //initialize your asteroid array and fill it
-  for (int i =0; i<asteroids.length; i++){
-    x_pos = random (0, width);
-    y_pos = random (0, height);
-    speed = random(0.5, 1);
-    direction = random(0, 360);
-    asteroids[i] = new Asteroid(x_pos, y_pos, speed, direction);
+  for (int i =0; i<=asteroids.length-1; i++){
+    asteroids[i] = new Asteroid((float)Math.random()*1000, (float)Math.random() * 800, (float)Math.random() * 5, (float)Math.random());
   }
   
   //initialize ship
@@ -61,12 +57,6 @@ public void setup() {
 public void draw() {
   //your code here
   background(0);
-  if ( x_pos <= 0) {
-      direction = y_pos*-1;
-    }
-  if (x_pos >= 1000) {
-      direction = y_pos +1;
-    }
 
   if(keyPressed){
     speed = 5;
@@ -79,7 +69,7 @@ public void draw() {
   //TODO: Part I
   for (int i =0; i<starField.length; i++){
     starField[i].show();
-    starField[i].twinkle();
+    //starField[i].twinkle();
   }
   
   
@@ -94,6 +84,7 @@ public void draw() {
   //Draw asteroids
   //TODO: Part II
   for (int i =0; i<asteroids.length; i++){
+    asteroids[i].update();
     asteroids[i].show();
     asteroids[i].move();
   }
