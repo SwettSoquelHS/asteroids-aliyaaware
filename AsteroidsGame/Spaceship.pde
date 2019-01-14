@@ -21,6 +21,18 @@ class Spaceship extends Mover {
     triangle(-20,-20,-20,20,70,0);
     triangle(-20,-30,-10,5, 35,0);
     popMatrix();
+    //pushMatrix();
+    //translate(x, y);
+    //rotate(radians(rotate));
+    //scale(5.0);
+    //fill(100);
+    //beginShape();
+    //vertex(5.0, 0.0);
+    //vertex(0.0, 8.0);
+    //vertex(-5.0, 0.0);
+    //vertex(-5.0, 5.0);
+    //endShape();
+    //popMatrix();
   }
   
   public Spaceship(float x, float y){

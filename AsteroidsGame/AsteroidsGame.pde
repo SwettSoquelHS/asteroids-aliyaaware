@@ -58,13 +58,6 @@ public void draw() {
   //your code here
   background(0);
 
-  if(keyPressed){
-    speed = 5;
-  }else{
-    speed =0;    
-  }
-
-  
   //Draw Starfield first 
   //TODO: Part I
   for (int i =0; i<starField.length; i++){
