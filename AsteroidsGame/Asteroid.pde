@@ -9,8 +9,8 @@
 class Asteroid extends Mover {   
   //your code here
   float rotate;
-  float[] xCoords = new float[5];
-  float[] yCoords = new float[5];
+  float[] xCoords = new float[13];
+  float[] yCoords = new float[13];
   //float x_pos, y, speed;
   //float direction = -1.0;
 
@@ -30,10 +30,19 @@ class Asteroid extends Mover {
     scale(5.0);
     fill(100);
     beginShape();
-    vertex(5.0, 0.0);
-    vertex(0.0, 8.0);
-    vertex(-5.0, 0.0);
-    vertex(-5.0, 5.0);
+    vertex(0.0,4.0);
+    vertex(2.0,3.8);
+    vertex(4.1, 1.0);
+    vertex(4.0,0.0);
+    vertex(3.0, -2.0);
+    vertex(2.0, -3.0);
+    vertex(1.0, -4.2);
+    vertex(0.0,-4.0);
+    vertex(-3.0, -4.2);
+    vertex(-4.0, -2.0);
+    vertex(-3.5, 0.0);
+    vertex(-3.3, 2.0);
+    vertex(-2, 3.5);
     endShape();
     popMatrix();
   }
@@ -42,9 +51,8 @@ class Asteroid extends Mover {
    x = x+(int)Math.random();
    y = y+(int)Math.random();
     
-    if (x > width || x < 0
-      ||y > height || y < 0) {
-        direction -= random(160, 190);
+    if (x > width || x < 0 ||y > height || y < 0) {
+        direction = random(360);
         direction *= -1;
     }
     if ( x <= 0) {
@@ -61,6 +69,6 @@ class Asteroid extends Mover {
   void update(){
     x = x+ speed*(float)Math.cos(radians(direction));
     y = y + speed*(float)Math.sin(radians(direction));
-    rotate += 2;
+    rotate += 1;
   }
 }

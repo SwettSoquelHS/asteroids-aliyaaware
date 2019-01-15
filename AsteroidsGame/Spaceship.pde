@@ -5,37 +5,12 @@
     might be useful.
 */
 class Spaceship extends Mover {  
-  void update(){
-    rotate(radians(direction));
-    triangle(-20,-20,-20,20,70,0);
-  }
+  //void update(){
+  //  rotate(radians(direction));
+  //  triangle(-20,-20,-20,20,70,0);
+  //}
   
-
-  void show(){
-    fill(40,40,50);
-    pushMatrix();
-    fill(255);
-    //translate(x_pos, y_pos);
-    rotate(radians(direction));
-    //ellipse(0,10,20,20);
-    triangle(-20,-20,-20,20,70,0);
-    triangle(-20,-30,-10,5, 35,0);
-    popMatrix();
-    //pushMatrix();
-    //translate(x, y);
-    //rotate(radians(rotate));
-    //scale(5.0);
-    //fill(100);
-    //beginShape();
-    //vertex(5.0, 0.0);
-    //vertex(0.0, 8.0);
-    //vertex(-5.0, 0.0);
-    //vertex(-5.0, 5.0);
-    //endShape();
-    //popMatrix();
-  }
-  
-  public Spaceship(float x, float y){
+  Spaceship(float x, float y){
     super(x,y);
   }
   
@@ -45,27 +20,84 @@ class Spaceship extends Mover {
     //this.direction = direction;
     super (x, y, speed, direction);
   }
-  void turn(){
-    if(ROTATE_LEFT)
-      direction -=4.0;
-    if (ROTATE_RIGHT)
-      direction +=4.0;
+  
+
+  void show(){
+    pushMatrix();
+    translate(x, y);
+    
+    rotate(radians(direction));
+    scale(10.0);
+    fill(10,10,255);
+    beginShape();
+    vertex(0.0, 5.0);
+    vertex(2.0, 0.0);
+    vertex(2.0, -4.0);
+    vertex(-2.0, -4.0);
+    vertex(-2.0, 0.0);
+    vertex(0.0, 5.0);
+    endShape();
+    beginShape();
+    vertex(-2.0, 0.0);
+    vertex(-4.5, -2.0);
+    vertex(-3.0, -6.0);
+    vertex(-2.0, -4.0);
+    endShape();
+    beginShape();
+    vertex(2.0, 0.0);
+    vertex(4.5,-2.0);
+    vertex(3.0, -6.0);
+    vertex(2.0, -4.0);
+    endShape();
+    popMatrix();
   }
-  void move(){
-    if (MOVE_FORWARD ==true){
-      if(speed<3){
-        speed+=0.5;
-      }
-    }else{
-      if (speed>0){
-        speed-=0.5;
-      }
-      if(speed<0)
-        speed =0;
-    }
-    if (y_pos >= 800 || y_pos <= 0) {
-      direction = direction*-1;      
-    }
+  
+  
+  void turn(float x){
+     direction +=x;
 
   }
+  void accelerate(float x){
+    if(speed<=50){
+        speed+=x;
+    }
+  }
 }
+  //void move(){
+  //  if (MOVE_FORWARD ==true){
+  //    if(speed<3){
+  //      speed+=0.5;
+  //    }
+  //  }else{
+  //    if (speed>0){
+  //      speed-=0.5;
+  //    }
+  //    if(speed<0)
+  //      speed =0;
+  //  }
+  //  if (y_pos >= 800 || y_pos <= 0) {
+  //    direction = direction*-1;      
+  //  }
+  //  if(ROTATE_LEFT) {
+  //    player1.direction -= 3.0;
+  //  }
+  //  if(ROTATE_RIGHT) {
+  //    player1.direction += 3.0;
+  //  }
+  //  if(MOVE_FORWARD) {
+  //    if(player1.speed<3.5){
+  //      player1.speed+=.1;
+  //    }
+  //  }
+  // if (!MOVE_FORWARD) {
+  //  if(player1.speed < 0){
+  //    player1.speed+=.05;
+  //  }
+  //  if(player1.speed > 0){
+  //    player1.speed-=.05;
+  //  }
+  //  if(player1.speed == 0){
+  //    player1.speed = 0;
+  //  }
+  //}
+//  }
