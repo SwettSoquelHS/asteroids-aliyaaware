@@ -3,13 +3,14 @@ class Star extends Mover {
   //your code here
   float x, y, speed, direction;
   
-  Star(float x, float y, float speed, float direction){
+  public Star(float x, float y, float speed, float direction){
     super(x, y, speed, direction);
     
-    this.speed = speed;
-    this.direction = direction;
-    
   }
+  Star(float x, float y){
+    super(x, y);
+  }
+  
   void show(){
     fill(100);
     ellipse(x,y,10,10);

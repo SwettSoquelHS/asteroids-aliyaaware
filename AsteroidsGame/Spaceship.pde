@@ -26,7 +26,7 @@ class Spaceship extends Mover {
     pushMatrix();
     translate(x, y);
     
-    rotate(radians(direction));
+    rotate(radians(direction-90));
     scale(10.0);
     fill(10,10,255);
     beginShape();
@@ -58,46 +58,37 @@ class Spaceship extends Mover {
 
   }
   void accelerate(float x){
-    if(speed<=50){
+    if(speed<=20 && speed >=0){
         speed+=x;
     }
   }
-}
-  //void move(){
-  //  if (MOVE_FORWARD ==true){
-  //    if(speed<3){
-  //      speed+=0.5;
-  //    }
-  //  }else{
-  //    if (speed>0){
-  //      speed-=0.5;
-  //    }
-  //    if(speed<0)
-  //      speed =0;
-  //  }
-  //  if (y_pos >= 800 || y_pos <= 0) {
-  //    direction = direction*-1;      
-  //  }
-  //  if(ROTATE_LEFT) {
-  //    player1.direction -= 3.0;
-  //  }
-  //  if(ROTATE_RIGHT) {
-  //    player1.direction += 3.0;
-  //  }
-  //  if(MOVE_FORWARD) {
-  //    if(player1.speed<3.5){
-  //      player1.speed+=.1;
-  //    }
-  //  }
-  // if (!MOVE_FORWARD) {
-  //  if(player1.speed < 0){
-  //    player1.speed+=.05;
-  //  }
-  //  if(player1.speed > 0){
-  //    player1.speed-=.05;
-  //  }
-  //  if(player1.speed == 0){
-  //    player1.speed = 0;
-  //  }
+  
+   void bounceOffWalls(){
+   //x = x+(int)Math.random();
+   //y = y+(int)Math.random();
+   x= x+speed*(float)Math.cos(radians(direction));
+   y= y+speed*(float)Math.sin(radians(direction));
+    
+    if (x > width || x < 0 ||y > height || y < 0) {
+        direction = random(360);
+        direction *= -1;
+    }
+    if ( x <= 0) {
+      direction = y*-1;
+    }
+    if (x >= 1000) {
+      direction = y +1;
+    }
+    if (y >= 800 || y <= 0) {
+      direction = direction*-1;      
+    }
+
+  }
+  //void down(float x){
+  //  direction*=-x;
   //}
-//  }
+  //void deccelerate(float x){
+  //  if(!(speed==0)){
+  //    speed-=x;
+  //  }
+}

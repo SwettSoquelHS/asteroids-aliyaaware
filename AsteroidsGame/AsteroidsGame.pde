@@ -14,6 +14,7 @@ Star[] starField = new Star[100];
 boolean ROTATE_LEFT;  //User is pressing <-
 boolean ROTATE_RIGHT; //User is pressing ->
 boolean MOVE_FORWARD; //User is pressing ^ arrow
+//boolean MOVE_DOWN;
 boolean SPACE_BAR;    //User is pressing space bar
 
 
@@ -26,13 +27,14 @@ public void setup() {
    ROTATE_LEFT = false;  
    ROTATE_RIGHT = false;
    MOVE_FORWARD = false; 
+ //  MOVE_DOWN=false;
    SPACE_BAR = false; 
   
   x_pos = width/23.0;
   y_pos= height/3.0;
   
   for (int i =0; i<starField.length; i++){
-    starField[i] = new Star(x_pos, y_pos, speed, direction);
+    starField[i] = new Star((float)Math.random()*1000, (float)Math.random() * 800, 0, 0);
   }
   
   //initialize your asteroid array and fill it
@@ -81,26 +83,26 @@ public void draw() {
 
   //Update spaceship
   //TODO: Part I
-  if(!keyPressed){
-    speed = 5;
-  }else{
-    speed =0;    
-  }
+
   
   
   if(ROTATE_LEFT)
-      player1.turn(-4.0);
-   if (ROTATE_RIGHT)
-      player1.turn(4.0);
-   if(MOVE_FORWARD)
-     player1.accelerate(0.5);    
-  
-    if (y_pos >= 800 || y_pos <= 0) {
-      direction = direction*-1;      
+      player1.turn(-5.0);
+  if (ROTATE_RIGHT)
+      player1.turn(5.0);
+  if(MOVE_FORWARD){
+     player1.accelerate(0.5);
+  }
+  if (!MOVE_FORWARD) {
+    if(player1.getSpeed() < 0){
+      player1.speed+=1.0;
+    //}else if(player1.getSpeed() > 0){
+    //  player1.speed-=1.0;
+    }else{
+      player1.speed = 0;
     }
-
-    //x_pos= x_pos+speed*(float)Math.cos(radians(direction));
-    //y_pos= y_pos+spee(float)Math.sin(radians(direction));
+  }
+  player1.bounceOffWalls();
   player1.update();
 
   
@@ -139,7 +141,9 @@ void keyPressed() {
       ROTATE_RIGHT = true;
     } else if (keyCode == UP) {
       MOVE_FORWARD = true;
-    }
+    } //else if (keyCode == DOWN) {
+    //  MOVE_DOWN = true;
+    //}
   }
 
   //32 is spacebar
@@ -161,7 +165,9 @@ void keyReleased() {
       ROTATE_RIGHT = false;
     } else if (keyCode == UP) {
       MOVE_FORWARD = false;
-    }
+    }//else if (keyCode == DOWN) {
+    //  MOVE_DOWN = false;
+    //}
   }
   if (keyCode == 32) {
     SPACE_BAR = false;
