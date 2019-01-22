@@ -6,6 +6,7 @@ float x_pos, y_pos, speed, direction;
 Spaceship player1;
 Asteroid[] asteroids= new Asteroid[20];
 Star[] starField = new Star[100];
+Bullet[] bullets = new Bullet[5];
 
 
 /*
@@ -44,7 +45,7 @@ public void setup() {
   
   //initialize ship
   player1 = new Spaceship((float)width/2, (float)height/2, 0, 0);
-  
+  //bullets = new Bullet(x_pos, y_pos, 10, 10)
   //initialize starfield
 }
 
@@ -58,6 +59,7 @@ public void draw() {
 
   //Draw Starfield first 
   //TODO: Part I
+
   for (int i =0; i<starField.length; i++){
     starField[i].show();
     //starField[i].twinkle();
@@ -105,7 +107,9 @@ public void draw() {
   player1.bounceOffWalls();
   player1.update();
 
-  
+  if(SPACE_BAR){
+    player1.fired();
+  }
   //Check for ship collision agaist asteroids
   //TODO: Part II or III
 

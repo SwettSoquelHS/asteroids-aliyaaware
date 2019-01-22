@@ -53,22 +53,22 @@ class Asteroid extends Mover {
     
     if (x > width || x < 0 ||y > height || y < 0) {
         direction = random(360);
-        direction *= -1;
+        direction *= -3;
     }
     if ( x <= 0) {
-      direction = y*-1;
+      direction = y*-3;
     }
     if (x >= 1000) {
-      direction = y +1;
+      direction = y +3;
     }
     if (y >= 800 || y <= 0) {
-      direction = direction*-1;      
+      direction = direction*-3;      
     }
 
   }
   void update(){
     x = x+ speed*(float)Math.cos(radians(direction));
     y = y + speed*(float)Math.sin(radians(direction));
-    rotate += 1;
+    rotate += 3;
   }
 }

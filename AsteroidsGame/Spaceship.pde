@@ -5,11 +5,10 @@
     might be useful.
 */
 class Spaceship extends Mover {  
-  //void update(){
-  //  rotate(radians(direction));
-  //  triangle(-20,-20,-20,20,70,0);
-  //}
-  
+
+  Bullet[] clip;
+  int round;
+  int wait;
   Spaceship(float x, float y){
     super(x,y);
   }
@@ -58,7 +57,7 @@ class Spaceship extends Mover {
 
   }
   void accelerate(float x){
-    if(speed<=20 && speed >=0){
+    if(speed<=10 && speed >=0){
         speed+=x;
     }
   }
@@ -71,7 +70,7 @@ class Spaceship extends Mover {
     
     if (x > width || x < 0 ||y > height || y < 0) {
         direction = random(360);
-        direction *= -1;
+        direction *= -3;
     }
     if ( x <= 0) {
       direction = y*-1;
@@ -84,6 +83,14 @@ class Spaceship extends Mover {
     }
 
   }
+  void fired() {
+    
+    }
+  //void update() {
+  //  x = x + speed*(float)Math.cos(radians(direction));
+  //  y = y + speed*(float)Math.sin(radians(direction));
+  //  min--;
+  //}
   //void down(float x){
   //  direction*=-x;
   //}

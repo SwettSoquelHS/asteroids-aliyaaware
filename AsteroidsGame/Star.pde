@@ -12,8 +12,11 @@ class Star extends Mover {
   }
   
   void show(){
+    pushMatrix();
+    translate(x, y);
     fill(100);
-    ellipse(x,y,10,10);
+    ellipse(0.0, 0.0, 10.0, 10.0);
+    popMatrix(); 
   }
   
   void twinkle(){
