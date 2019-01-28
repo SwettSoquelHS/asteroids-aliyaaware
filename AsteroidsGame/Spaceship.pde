@@ -18,6 +18,7 @@ class Spaceship extends Mover {
     //this.speed = speed;
     //this.direction = direction;
     super (x, y, speed, direction);
+    wait=0;
   }
   
 
@@ -68,29 +69,47 @@ class Spaceship extends Mover {
    x= x+speed*(float)Math.cos(radians(direction));
    y= y+speed*(float)Math.sin(radians(direction));
     
-    if (x > width || x < 0 ||y > height || y < 0) {
-        direction = random(360);
-        direction *= -3;
-    }
+    //if (x > width || x < 0 ||y > height || y < 0) {
+    //    direction = random(360);
+    //    direction *= -3;
+    //}
     if ( x <= 0) {
-      direction = y*-1;
+      //direction = y*-1;
+      x=1000;
     }
     if (x >= 1000) {
-      direction = y +1;
+      //direction = y +1;
+      x=0;
     }
-    if (y >= 800 || y <= 0) {
-      direction = direction*-1;      
+    if (y >= 800 ) {
+      //direction = direction*-1; 
+      y=0;
+    }
+    if (y <= 0){
+      y=800;
     }
 
   }
-  void fired() {
-    
-    }
-  //void update() {
-  //  x = x + speed*(float)Math.cos(radians(direction));
-  //  y = y + speed*(float)Math.sin(radians(direction));
-  //  min--;
-  //}
+  void fired() 
+  {
+    //for(int i =0; i <bullets.length;i++)
+    //{
+    //  if(bullets[i] != null)
+    //  {
+    //    bullets[i].move();
+    //    bullets[i].show();
+    //    if(bullets[i].dud)
+    //    {
+    //      bullets[i] = null;
+    //    }
+    //  }
+    //}
+  }
+  void update() {
+    x = x + speed*(float)Math.cos(radians(direction));
+    y = y + speed*(float)Math.sin(radians(direction));
+    wait--;
+  }
   //void down(float x){
   //  direction*=-x;
   //}

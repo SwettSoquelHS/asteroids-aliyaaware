@@ -1,5 +1,6 @@
 class Bullet extends Spaceship {
   private float x_pos, y_pos;
+  
   public Bullet(float x, float y, float speed, float direction){
     super(x, y, speed, direction);
     x_pos = x;
@@ -10,7 +11,7 @@ class Bullet extends Spaceship {
     translate(x, y);
     rotate(radians(direction));
     fill(255,0,0);
-    scale(.25);
+    scale(1);
     ellipse(-40, -2, 40, 4);
     popMatrix();
   }
@@ -19,4 +20,6 @@ class Bullet extends Spaceship {
     x_pos = x_pos + 12 * (float)Math.cos(radians(direction));
     y_pos = y_pos + 12 * (float)Math.sin(radians(direction));
   }
+  
+  void collision(){}
 }

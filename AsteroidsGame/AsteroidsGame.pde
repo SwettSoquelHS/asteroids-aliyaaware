@@ -34,8 +34,8 @@ public void setup() {
   x_pos = width/23.0;
   y_pos= height/3.0;
   
-  for (int i =0; i<starField.length; i++){
-    starField[i] = new Star((float)Math.random()*1000, (float)Math.random() * 800, 0, 0);
+  for (int i =0; i<100; i++){
+    starField[i] = new Star((float)Math.random()*1000, (float)Math.random() * 800);
   }
   
   //initialize your asteroid array and fill it
@@ -56,10 +56,8 @@ public void setup() {
 public void draw() {
   //your code here
   background(0);
-
   //Draw Starfield first 
   //TODO: Part I
-
   for (int i =0; i<starField.length; i++){
     starField[i].show();
     //starField[i].twinkle();
@@ -71,7 +69,7 @@ public void draw() {
 
   //TODO: Part II, Update each of the Asteroids internals
   checkOnAsteroids();
-
+  
   //Check for asteroid collisions against other asteroids and alter course
   //TODO: Part III, for now keep this comment in place
 
@@ -105,26 +103,22 @@ public void draw() {
     }
   }
   player1.bounceOffWalls();
+  
   player1.update();
-
+  
+  player1.show();
+  
   if(SPACE_BAR){
     player1.fired();
   }
+  
+  
   //Check for ship collision agaist asteroids
   //TODO: Part II or III
 
   //Draw spaceship & and its bullets
   //TODO: Part I, for now just render ship
-  player1.show();
-  //for(int i =0; i <bullets.length1;i++){
-  //  if(bullets[i] != null){
-  //    bullets[i].move();
-  //    bullets[i].show();
-  //    if(bullets[i].dud){
-  //      bullets[i] = null;
-  //    }
-  //  }
-  //}
+  
   //TODO: Part IV - we will use a new feature in Java called an ArrayList, 
   //so for now we'll just leave this comment and come back to it in a bit. 
   

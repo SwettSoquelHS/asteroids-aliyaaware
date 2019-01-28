@@ -1,21 +1,17 @@
 //note that this class does NOT *NEED* to extend Mover but can if you like
-class Star extends Mover {
-  //your code here
+class Star{
   float x, y, speed, direction;
   
-  public Star(float x, float y, float speed, float direction){
-    super(x, y, speed, direction);
-    
+  public Star(float x, float y){
+    this.x=x;
+    this.y=y;
   }
-  Star(float x, float y){
-    super(x, y);
-  }
-  
+
   void show(){
     pushMatrix();
     translate(x, y);
-    fill(100);
-    ellipse(0.0, 0.0, 10.0, 10.0);
+    fill(210,210,0);
+    ellipse(x, y, 10.0, 10.0);
     popMatrix(); 
   }
   

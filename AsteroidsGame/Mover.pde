@@ -74,6 +74,7 @@ abstract class Mover implements Movable {
   protected float direction;
   protected int myColor;
   protected float radius; 
+  
   float getX(){
     return x;
   }
