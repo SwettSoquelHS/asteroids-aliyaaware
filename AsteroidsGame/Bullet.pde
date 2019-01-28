@@ -1,5 +1,5 @@
 class Bullet extends Spaceship {
-  private float x_pos, y_pos;
+  protected float x_pos, y_pos;
   
   public Bullet(float x, float y, float speed, float direction){
     super(x, y, speed, direction);
