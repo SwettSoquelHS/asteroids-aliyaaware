@@ -4,10 +4,11 @@ import java.util.ArrayList;
  */
 float x_pos, y_pos, speed, direction;
 
+//ArrayList<Asteroid> ast = new ArrayList<Asteroid>();
+ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 Spaceship player1;
-Asteroid[] asteroids= new Asteroid[20];
+Asteroid[] asteroids= new Asteroid[10];
 Star[] starField = new Star[100];
-Bullet[] bullets = new Bullet[5];
 
 
 /*
@@ -35,6 +36,7 @@ public void setup() {
   x_pos = width/23.0;
   y_pos= height/3.0;
   
+  //starfeild
   for (int i =0; i<100; i++){
     starField[i] = new Star((float)Math.random()*1000, (float)Math.random() * 800);
   }
@@ -46,8 +48,10 @@ public void setup() {
   
   //initialize ship
   player1 = new Spaceship((float)width/2, (float)height/2, 0, 0);
-  //bullets = new Bullet(x_pos, y_pos, 10, 10)
-  //initialize starfield
+  
+  //bullet array
+  Bullet b = new Bullet(x_pos, y_pos, 10, 10);
+  bullets.add(b);
 }
 
 
@@ -84,7 +88,6 @@ public void draw() {
 
   //Update spaceship
   //TODO: Part I
-
   
   
   if(ROTATE_LEFT)
@@ -97,18 +100,13 @@ public void draw() {
   if (!MOVE_FORWARD) {
     if(player1.getSpeed() < 0){
       player1.speed+=1.0;
-    //}else if(player1.getSpeed() > 0){
-    //  player1.speed-=1.0;
     }else{
       player1.speed = 0;
     }
   }
   player1.bounceOffWalls();
   
-  player1.update();
-  
-  player1.show();
-  
+
   if(SPACE_BAR){
     player1.fired();
   }
@@ -119,6 +117,30 @@ public void draw() {
 
   //Draw spaceship & and its bullets
   //TODO: Part I, for now just render ship
+   player1.update();
+  
+   player1.show();
+   
+  for(int i=0; i<player1.bullHolder.size(); i++){
+    if(i<player1.round){
+      Bullet b = (Bullet)player1.bullHolder.get(i);
+      b.show();
+      b.update();
+    }
+   }
+  //for(int i = 0; i<8; i++) {
+  //    Asteroid astroids2 = (Asteroid)astroids2.get(i);
+  //    astroids2.update();
+  //    astroids2.show();
+  //    if(astroids2.getX() >800)
+  //     astroids2.x = 0;
+  //   if(astroids2.getX() <0)
+  //     astroids2.x = 800;
+  //   if(astroids2.getY()>600)
+  //     astroids2.y = 0;
+  //   if(astroids2.getY() <0)
+  //     astroids2.y = 600;
+  //  }
   
   //TODO: Part IV - we will use a new feature in Java called an ArrayList, 
   //so for now we'll just leave this comment and come back to it in a bit. 

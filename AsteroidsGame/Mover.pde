@@ -57,7 +57,7 @@ interface Movable {
    the movable referred to by object.  *Note* An object should not
    be able to collide with iteself.
    */
-  boolean collidingWith(Movable object);
+  boolean collidingWith(Movable m);
 }
 //END OF Movable Interface
 
@@ -134,13 +134,13 @@ abstract class Mover implements Movable {
     y = y + speed*(float)Math.sin(radians(direction));
     
     
-   if (x<0 || x>width){    //todo: You need to decide what to do when X is less than 0 or greater than width
-     speed = 2;
-   }
-   if (y <0 || y > height){ //todo: You need to decide what to do when Y is less than 0 or greater than height
-     direction+=1;
-     speed = 2;
-   }
+   //if (x<0 || x>width){    //todo: You need to decide what to do when X is less than 0 or greater than width
+   //  speed = 2;
+   //}
+   //if (y <0 || y > height){ //todo: You need to decide what to do when Y is less than 0 or greater than height
+   //  direction+=1;
+   //  speed = 2;
+   //}
    
    
   }

@@ -1,17 +1,13 @@
 class Asteroid extends Mover {   
   //your code here
   float rotate;
-  float[] xCoords = new float[13];
-  float[] yCoords = new float[13];
-  //float x_pos, y, speed;
-  //float direction = -1.0;
-
+  boolean hit;
   
   public Asteroid(float x, float y, float speed, float direction){
     super(x, y, speed, direction);
     radius  = 20;
-    
   }
+  
   Asteroid(float x, float y){
     super(x,y);
   }
@@ -48,26 +44,27 @@ class Asteroid extends Mover {
         direction = random(360);
         direction *= -3;
     }
-    if ( x <= 0) {
-      //direction = y*-3;
-      x=1000;
-    }
-    if (x >= 1000) {
-      //direction = y +3;
-      x=0;
-    }
+    //if ( x <= 0) {
+    //  //direction = y*-3;
+    //  x=1000;
+    //}
+    //if (x >= 1000) {
+    //  //direction = y +3;
+    //  x=0;
+    //}
     if (y >= 800) {
       //direction = direction*-3;
       y=0;
     }
     if (y <= 0){
-      y = 800;
+      //y = 800;
+      direction = direction*-3;
     }
 
   }
   void update(){
     x = x+ speed*(float)Math.cos(radians(direction));
     y = y + speed*(float)Math.sin(radians(direction));
-    rotate += 3;
+    rotate += 1;
   }
 }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
   /*
   Spaceship class
     Should extend Mover class and implement show.
@@ -5,10 +6,11 @@
     might be useful.
 */
 class Spaceship extends Mover {  
-
-  Bullet[] clip;
+  ArrayList<Bullet> bullHolder;
+  Bullet[] bullet;
   int round;
   int wait;
+  
   Spaceship(float x, float y){
     super(x,y);
   }
@@ -19,6 +21,7 @@ class Spaceship extends Mover {
     //this.direction = direction;
     super (x, y, speed, direction);
     wait=0;
+    round = 15;
   }
   
 
@@ -92,29 +95,22 @@ class Spaceship extends Mover {
   }
   void fired() 
   {
-    //for(int i =0; i <bullets.length;i++)
-    //{
-    //  if(bullets[i] != null)
-    //  {
-    //    bullets[i].move();
-    //    bullets[i].show();
-    //    if(bullets[i].dud)
-    //    {
-    //      bullets[i] = null;
-    //    }
-    //  }
-    //}
+    if(round<8 && wait<0 && bullHolder.size()<8){
+      Bullet bullet = new Bullet(x, y, 5, direction);
+      bullHolder.add(bullet);
+      round++;
+      wait = 14;
+    }
   }
+  
   void update() {
     x = x + speed*(float)Math.cos(radians(direction));
     y = y + speed*(float)Math.sin(radians(direction));
     wait--;
   }
-  //void down(float x){
-  //  direction*=-x;
-  //}
-  //void deccelerate(float x){
-  //  if(!(speed==0)){
-  //    speed-=x;
-  //  }
+  void removed(int bullet1){
+    bullHolder.remove(bullet1);
+    if(round>0)
+      round-=1;
+  }
 }
