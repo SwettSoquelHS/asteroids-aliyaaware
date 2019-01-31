@@ -86,10 +86,8 @@ public void draw() {
     asteroids[i].move();
   }
 
-  //Update spaceship
-  //TODO: Part I
   
-  
+  //spaceship
   if(ROTATE_LEFT)
       player1.turn(-5.0);
   if (ROTATE_RIGHT)
@@ -126,6 +124,19 @@ public void draw() {
       Bullet b = (Bullet)player1.bullHolder.get(i);
       b.show();
       b.update();
+    
+    if(b.getX() >800){
+        player1.removed(i);
+      }
+      if(b.getX() <0){
+        player1.removed(i);
+      }
+      if(b.getY() >1000){
+        player1.removed(i);
+      }
+      if(b.getY() <0){
+        player1.removed(i);
+      }
     }
    }
   //for(int i = 0; i<8; i++) {
@@ -202,7 +213,8 @@ void checkOnAsteroids(){
     for (int j = 0; j< asteroids.length; j++){
       Asteroid a2 = asteroids[j];
       if (a1!=a2 && a1.collidingWith(a2)){
-        //do something
+        a1.direction = a1.direction*-50;
+        a2.direction = a2.direction *50;
       }
     }
   }

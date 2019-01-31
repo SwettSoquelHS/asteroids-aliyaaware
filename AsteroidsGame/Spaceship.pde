@@ -6,7 +6,7 @@ import java.util.ArrayList;
     might be useful.
 */
 class Spaceship extends Mover {  
-  ArrayList<Bullet> bullHolder;
+  ArrayList bullHolder;
   Bullet[] bullet;
   int round;
   int wait;
@@ -22,6 +22,7 @@ class Spaceship extends Mover {
     super (x, y, speed, direction);
     wait=0;
     round = 15;
+    bullHolder = new ArrayList();
   }
   
 
@@ -95,12 +96,15 @@ class Spaceship extends Mover {
   }
   void fired() 
   {
-    if(round<8 && wait<0 && bullHolder.size()<8){
-      Bullet bullet = new Bullet(x, y, 5, direction);
-      bullHolder.add(bullet);
-      round++;
-      wait = 14;
-    }
+      if(round<8 && wait<0 && bullHolder.size()<8){
+        Bullet bullet = new Bullet(x, y, 5, direction);
+        bullHolder.add(bullet);
+        round++;
+        wait = 14;
+      }
+      for (int i=0; i<bullHolder.size(); i++){
+        bullHolder.remove(bullet);
+      }
   }
   
   void update() {
