@@ -4,7 +4,7 @@ import java.util.ArrayList;
  */
 float x_pos, y_pos, speed, direction;
 
-//ArrayList<Asteroid> ast = new ArrayList<Asteroid>();
+ArrayList<Asteroid> ast = new ArrayList<Asteroid>();
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 Spaceship player1;
 Asteroid[] asteroids= new Asteroid[10];
@@ -81,9 +81,18 @@ public void draw() {
   //Draw asteroids
   //TODO: Part II
   for (int i =0; i<asteroids.length; i++){
+    Asteroid ast = (Asteroid)ast.get(i);
     asteroids[i].update();
     asteroids[i].show();
     asteroids[i].move();
+      if(ast.getX() >800)
+       ast.x = 0;
+     if(ast.getX() <0)
+       ast.x = 800;
+     if(ast.getY()>600)
+       ast.y = 0;
+     if(ast.getY() <0)
+       ast.y = 600;
   }
 
   
@@ -120,7 +129,7 @@ public void draw() {
    player1.show();
    
   for(int i=0; i<player1.bullHolder.size(); i++){
-    if(i<player1.round){
+    if(i<player1.shoot){
       Bullet b = (Bullet)player1.bullHolder.get(i);
       b.show();
       b.update();
@@ -139,19 +148,7 @@ public void draw() {
       }
     }
    }
-  //for(int i = 0; i<8; i++) {
-  //    Asteroid astroids2 = (Asteroid)astroids2.get(i);
-  //    astroids2.update();
-  //    astroids2.show();
-  //    if(astroids2.getX() >800)
-  //     astroids2.x = 0;
-  //   if(astroids2.getX() <0)
-  //     astroids2.x = 800;
-  //   if(astroids2.getY()>600)
-  //     astroids2.y = 0;
-  //   if(astroids2.getY() <0)
-  //     astroids2.y = 600;
-  //  }
+  
   
   //TODO: Part IV - we will use a new feature in Java called an ArrayList, 
   //so for now we'll just leave this comment and come back to it in a bit. 
@@ -212,9 +209,22 @@ void checkOnAsteroids(){
     Asteroid a1 = asteroids[i];
     for (int j = 0; j< asteroids.length; j++){
       Asteroid a2 = asteroids[j];
-      if (a1!=a2 && a1.collidingWith(a2)){
+      if (i!=j && a1.collidingWith(a2)){
         a1.direction = a1.direction*-50;
         a2.direction = a2.direction *50;
+        a1.collide=10;
+        a2.collide=10;
+      }
+    }
+  }
+}
+
+void checkOnBullets(){
+  for (int i=0; i<asteroids.length; i++){
+    Asteroid a1 = asteroids[i];
+    for(int j=0; j<player1.bullHolder.size(); j++){
+      if(j<player1.shoot){
+       
       }
     }
   }

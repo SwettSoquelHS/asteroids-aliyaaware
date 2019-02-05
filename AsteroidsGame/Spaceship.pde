@@ -8,7 +8,7 @@ import java.util.ArrayList;
 class Spaceship extends Mover {  
   ArrayList bullHolder;
   Bullet[] bullet;
-  int round;
+  int shoot;
   int wait;
   
   Spaceship(float x, float y){
@@ -21,7 +21,7 @@ class Spaceship extends Mover {
     //this.direction = direction;
     super (x, y, speed, direction);
     wait=0;
-    round = 15;
+    shoot = 15;
     bullHolder = new ArrayList();
   }
   
@@ -96,10 +96,10 @@ class Spaceship extends Mover {
   }
   void fired() 
   {
-      if(round<8 && wait<0 && bullHolder.size()<8){
+      if(shoot<8 && wait<0 && bullHolder.size()<8){
         Bullet bullet = new Bullet(x, y, 5, direction);
         bullHolder.add(bullet);
-        round++;
+        shoot++;
         wait = 14;
       }
       for (int i=0; i<bullHolder.size(); i++){
@@ -114,7 +114,7 @@ class Spaceship extends Mover {
   }
   void removed(int bullet1){
     bullHolder.remove(bullet1);
-    if(round>0)
-      round-=1;
+    if(shoot>0)
+      shoot-=1;
   }
 }
