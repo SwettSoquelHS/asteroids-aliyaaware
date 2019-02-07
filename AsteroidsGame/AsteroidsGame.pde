@@ -7,6 +7,7 @@ float x_pos, y_pos, speed, direction;
 ArrayList<Asteroid> ast = new ArrayList<Asteroid>();
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 Spaceship player1;
+Bullet[] bull = new Bullet[10];
 Asteroid[] asteroids= new Asteroid[10];
 Star[] starField = new Star[100];
 
@@ -52,6 +53,10 @@ public void setup() {
   //bullet array
   Bullet b = new Bullet(x_pos, y_pos, 10, 10);
   bullets.add(b);
+ 
+  for (int i = 0; i < bull.length; i++) {
+      bull[1] = new Bullet((float)width/2, (float)height/2, 0, 0);
+    }
 }
 
 
@@ -61,8 +66,8 @@ public void setup() {
 public void draw() {
   //your code here
   background(0);
+  
   //Draw Starfield first 
-  //TODO: Part I
   for (int i =0; i<starField.length; i++){
     starField[i].show();
     //starField[i].twinkle();
@@ -74,25 +79,16 @@ public void draw() {
 
   //TODO: Part II, Update each of the Asteroids internals
   checkOnAsteroids();
-  
+  checkOnBullets();
   //Check for asteroid collisions against other asteroids and alter course
   //TODO: Part III, for now keep this comment in place
 
   //Draw asteroids
   //TODO: Part II
   for (int i =0; i<asteroids.length; i++){
-    Asteroid ast = (Asteroid)ast.get(i);
     asteroids[i].update();
     asteroids[i].show();
     asteroids[i].move();
-      if(ast.getX() >800)
-       ast.x = 0;
-     if(ast.getX() <0)
-       ast.x = 800;
-     if(ast.getY()>600)
-       ast.y = 0;
-     if(ast.getY() <0)
-       ast.y = 600;
   }
 
   
@@ -116,8 +112,9 @@ public void draw() {
 
   if(SPACE_BAR){
     player1.fired();
+    bull[1].show();
+    bull[1].move();
   }
-  
   
   //Check for ship collision agaist asteroids
   //TODO: Part II or III
@@ -133,22 +130,8 @@ public void draw() {
       Bullet b = (Bullet)player1.bullHolder.get(i);
       b.show();
       b.update();
-    
-    if(b.getX() >800){
-        player1.removed(i);
-      }
-      if(b.getX() <0){
-        player1.removed(i);
-      }
-      if(b.getY() >1000){
-        player1.removed(i);
-      }
-      if(b.getY() <0){
-        player1.removed(i);
-      }
     }
    }
-  
   
   //TODO: Part IV - we will use a new feature in Java called an ArrayList, 
   //so for now we'll just leave this comment and come back to it in a bit. 
@@ -224,7 +207,11 @@ void checkOnBullets(){
     Asteroid a1 = asteroids[i];
     for(int j=0; j<player1.bullHolder.size(); j++){
       if(j<player1.shoot){
-       
+       Bullet b2 = player1.bullHolder.get(j);
+       if(b2.collidingWith(a1)){
+         player1.removed(j);
+         //asteroids.remove(i);
+       }
       }
     }
   }

@@ -6,10 +6,9 @@ import java.util.ArrayList;
     might be useful.
 */
 class Spaceship extends Mover {  
-  ArrayList bullHolder;
+  ArrayList<Bullet> bullHolder;
   Bullet[] bullet;
   int shoot;
-  int wait;
   
   Spaceship(float x, float y){
     super(x,y);
@@ -20,7 +19,6 @@ class Spaceship extends Mover {
     //this.speed = speed;
     //this.direction = direction;
     super (x, y, speed, direction);
-    wait=0;
     shoot = 15;
     bullHolder = new ArrayList();
   }
@@ -73,35 +71,28 @@ class Spaceship extends Mover {
    x= x+speed*(float)Math.cos(radians(direction));
    y= y+speed*(float)Math.sin(radians(direction));
     
-    //if (x > width || x < 0 ||y > height || y < 0) {
-    //    direction = random(360);
-    //    direction *= -3;
-    //}
-    if ( x <= 0) {
-      //direction = y*-1;
-      x=1000;
-    }
-    if (x >= 1000) {
-      //direction = y +1;
-      x=0;
-    }
-    if (y >= 800 ) {
-      //direction = direction*-1; 
-      y=0;
-    }
-    if (y <= 0){
-      y=800;
-    }
+    if(x >1000)
+       x = 0;
+     if(x <0)
+       x = 1000;
+     if(y>800)
+       y = 0;
+     if(y <0)
+       y = 800;
 
   }
   void fired() 
   {
-      if(shoot<8 && wait<0 && bullHolder.size()<8){
-        Bullet bullet = new Bullet(x, y, 5, direction);
-        bullHolder.add(bullet);
-        shoot++;
-        wait = 14;
-      }
+    for(int j=0; j<bullHolder.size(); j++){
+      Bullet bullet = new Bullet(x, y, 5, direction);
+      bullHolder.add(bullet);
+      shoot++;
+    }
+      //if(shoot<8 && bullHolder.size()<8){
+      //  Bullet bullet = new Bullet(x, y, 5, direction);
+      //  bullHolder.add(bullet);
+      //  shoot++;
+      //}
       for (int i=0; i<bullHolder.size(); i++){
         bullHolder.remove(bullet);
       }
@@ -110,8 +101,8 @@ class Spaceship extends Mover {
   void update() {
     x = x + speed*(float)Math.cos(radians(direction));
     y = y + speed*(float)Math.sin(radians(direction));
-    wait--;
   }
+  
   void removed(int bullet1){
     bullHolder.remove(bullet1);
     if(shoot>0)
