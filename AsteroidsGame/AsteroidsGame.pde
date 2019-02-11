@@ -4,8 +4,8 @@ import java.util.ArrayList;
  */
 float x_pos, y_pos, speed, direction;
 
-ArrayList<Asteroid> ast = new ArrayList<Asteroid>();
-ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+//ArrayList<Asteroid> ast = new ArrayList<Asteroid>();
+//ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 Spaceship player1;
 Bullet[] bull = new Bullet[10];
 Asteroid[] asteroids= new Asteroid[10];
@@ -51,11 +51,11 @@ public void setup() {
   player1 = new Spaceship((float)width/2, (float)height/2, 0, 0);
   
   //bullet array
-  Bullet b = new Bullet(x_pos, y_pos, 10, 10);
-  bullets.add(b);
+  //Bullet b = new Bullet(x_pos, y_pos, 10, 10);
+  //bullets.add(b);
  
   for (int i = 0; i < bull.length; i++) {
-      bull[1] = new Bullet((float)width/2, (float)height/2, 0, 0);
+      bull[i] = new Bullet((float)width/2, (float)height/2, 0, 0);
     }
 }
 
@@ -79,7 +79,7 @@ public void draw() {
 
   //TODO: Part II, Update each of the Asteroids internals
   checkOnAsteroids();
-  checkOnBullets();
+  //checkOnBullets();
   //Check for asteroid collisions against other asteroids and alter course
   //TODO: Part III, for now keep this comment in place
 
@@ -112,10 +112,27 @@ public void draw() {
 
   if(SPACE_BAR){
     player1.fired();
-    bull[1].show();
-    bull[1].move();
   }
   
+  for (int i = 0; i < player1.bullHolder.size(); i++) {
+    Bullet b = (Bullet)player1.bullHolder.get(i);
+    if (b.getX() >= 1000) {
+      player1.bullHolder.remove(i);
+    }
+    if (b.getX() < 0) {
+      player1.bullHolder.remove(i);
+    }
+    if (b.getY() > 800) {
+      player1.bullHolder.remove(i);
+    }
+    if (b.getY() < 0) {
+      player1.bullHolder.remove(i);
+    }
+    Bullet bullet = (Bullet)b;
+    bullet.show();
+    bullet.move();
+    bullet.update();
+  }
   //Check for ship collision agaist asteroids
   //TODO: Part II or III
 
@@ -202,17 +219,17 @@ void checkOnAsteroids(){
   }
 }
 
-void checkOnBullets(){
-  for (int i=0; i<asteroids.length; i++){
-    Asteroid a1 = asteroids[i];
-    for(int j=0; j<player1.bullHolder.size(); j++){
-      if(j<player1.shoot){
-       Bullet b2 = player1.bullHolder.get(j);
-       if(b2.collidingWith(a1)){
-         player1.removed(j);
-         //asteroids.remove(i);
-       }
-      }
-    }
-  }
-}
+//void checkOnBullets(){
+//  for (int i=0; i<asteroids.length; i++){
+//    Asteroid a1 = asteroids[i];
+//    for(int j=0; j<player1.bullHolder.size(); j++){
+//      if(j<player1.shoot){
+//       Bullet b2 = player1.bullHolder.get(j);
+//       if(b2.collidingWith(a1)){
+//         player1.removed(j);
+//         //asteroids.remove(i);
+//       }
+//      }
+//    }
+//  }
+//}

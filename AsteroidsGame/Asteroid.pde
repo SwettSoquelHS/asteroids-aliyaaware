@@ -3,21 +3,21 @@ class Asteroid extends Mover {
   float rotate;
   boolean hit;
   int collide;
-
   
   public Asteroid(float x, float y, float speed, float direction){
     super(x, y, speed, direction);
     radius  = 20;
-    collide =   0;
+    collide = 0;
   }
   
-  Asteroid(float x, float y){
+  public Asteroid(float x, float y){
     super(x,y);
   }
   
   void show(){
     pushMatrix();
-    translate(x, y);
+    stroke(2);
+    translate((float)x, (float)y);
     rotate(radians(rotate));
     scale(7.0);
     fill(100);
@@ -35,6 +35,7 @@ class Asteroid extends Mover {
     vertex(-3.5, 0.0);
     vertex(-3.3, 2.0);
     vertex(-2, 3.5);
+    vertex(0.0,4.0);
     endShape();
     popMatrix();
   }
@@ -58,9 +59,9 @@ class Asteroid extends Mover {
 
   }
   void update(){
-    x = x+ (float)Math.cos(radians(direction)*5);
-    y = y + (float)Math.sin(radians(direction)*5);
-    rotate += 1;
+    x = x+ (float)Math.cos(radians(direction)*7);
+    y = y + (float)Math.sin(radians(direction)*7);
+    rotate += 3;
     collide--;
   }
 }
