@@ -226,7 +226,7 @@ void checkOnBullets(){
        Bullet b2 = player1.bullHolder.get(j);
        if (b2.collidingWith(a1)){
          player1.removed(j);
-         ast.remove(i);
+         // ast.remove(i);
        }
       }
     }
