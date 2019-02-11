@@ -7,7 +7,7 @@ import java.util.ArrayList;
 */
 class Spaceship extends Mover {  
   ArrayList<Bullet> bullHolder;
-  int shoot;
+  int bulletWait;
   Bullet bullet; 
   
   Spaceship(float x, float y){
@@ -16,7 +16,7 @@ class Spaceship extends Mover {
   
   public Spaceship(float x, float y, float speed, float direction) {
     super (x, y, speed, direction);
-    shoot = 0;
+    bulletWait = 0;
     bullHolder = new ArrayList();
   }
 
@@ -81,10 +81,10 @@ class Spaceship extends Mover {
   
   void fired() 
   {
-    if(shoot<=0){
+    if(bulletWait<=0){
       Bullet bullet = new Bullet(player1.getX(), player1.getY(), 5.0, player1.getDirection());
       bullHolder.add(bullet);
-      shoot=15;
+      bulletWait=10;
     }
 
   }
@@ -92,12 +92,12 @@ class Spaceship extends Mover {
   void update() {
     x = x + speed*(float)Math.cos(radians(direction));
     y = y + speed*(float)Math.sin(radians(direction));
-    shoot--;
+    bulletWait--;
   }
   
   void removed(int bullet1){
     bullHolder.remove(bullet1);
-    if(shoot>0)
-      shoot-=1;
+    if(bulletWait>0)
+      bulletWait-=1;
   }
 }

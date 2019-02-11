@@ -4,7 +4,7 @@ import java.util.ArrayList;
  */
 float x_pos, y_pos, speed, direction;
 
-//ArrayList<Asteroid> ast = new ArrayList<Asteroid>();
+ArrayList<Asteroid> ast = new ArrayList<Asteroid>();
 //ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 Spaceship player1;
 Bullet[] bull = new Bullet[10];
@@ -79,7 +79,8 @@ public void draw() {
 
   //TODO: Part II, Update each of the Asteroids internals
   checkOnAsteroids();
-  //checkOnBullets();
+  checkOnBullets(); 
+
   //Check for asteroid collisions against other asteroids and alter course
   //TODO: Part III, for now keep this comment in place
 
@@ -143,7 +144,7 @@ public void draw() {
    player1.show();
    
   for(int i=0; i<player1.bullHolder.size(); i++){
-    if(i<player1.shoot){
+    if(i<player1.bulletWait){
       Bullet b = (Bullet)player1.bullHolder.get(i);
       b.show();
       b.update();
@@ -209,27 +210,25 @@ void checkOnAsteroids(){
     Asteroid a1 = asteroids[i];
     for (int j = 0; j< asteroids.length; j++){
       Asteroid a2 = asteroids[j];
-      if (i!=j && a1.collidingWith(a2)){
-        a1.direction = a1.direction*-50;
-        a2.direction = a2.direction *50;
-        a1.collide=10;
-        a2.collide=10;
+      if (i!=j && a1.collidingWith(a2) && a1.astRadius<0 && a2.astRadius<0){
+        a1.direction = a1.direction+150;
+        a2.direction = a2.direction-120;
       }
     }
   }
 }
 
-//void checkOnBullets(){
-//  for (int i=0; i<asteroids.length; i++){
-//    Asteroid a1 = asteroids[i];
-//    for(int j=0; j<player1.bullHolder.size(); j++){
-//      if(j<player1.shoot){
-//       Bullet b2 = player1.bullHolder.get(j);
-//       if(b2.collidingWith(a1)){
-//         player1.removed(j);
-//         //asteroids.remove(i);
-//       }
-//      }
-//    }
-//  }
-//}
+void checkOnBullets(){
+  for (int i=0; i<asteroids.length; i++){
+    Asteroid a1 = asteroids[i];
+    for (int j=0; j<player1.bullHolder.size(); j++){
+       if (j<player1.bulletWait){
+       Bullet b2 = player1.bullHolder.get(j);
+       if (b2.collidingWith(a1)){
+         player1.removed(j);
+         ast.remove(i);
+       }
+      }
+    }
+  }
+}

@@ -2,12 +2,12 @@ class Asteroid extends Mover {
   //your code here
   float rotate;
   boolean hit;
-  int collide;
+  int astRadius;
   
   public Asteroid(float x, float y, float speed, float direction){
     super(x, y, speed, direction);
     radius  = 20;
-    collide = 0;
+    astRadius =0;
   }
   
   public Asteroid(float x, float y){
@@ -62,6 +62,7 @@ class Asteroid extends Mover {
     x = x+ (float)Math.cos(radians(direction)*7);
     y = y + (float)Math.sin(radians(direction)*7);
     rotate += 3;
-    collide--;
+    astRadius--;
   }
+  
 }

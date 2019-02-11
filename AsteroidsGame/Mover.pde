@@ -55,7 +55,7 @@ interface Movable {
   /*
    Return true if the instance of Movable is "colliding with" 
    the movable referred to by object.  *Note* An object should not
-   be able to collide with iteself.
+   be able to astRadius with iteself.
    */
   boolean collidingWith(Movable m);
 }
