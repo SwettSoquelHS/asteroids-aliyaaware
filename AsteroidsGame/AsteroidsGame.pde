@@ -7,10 +7,11 @@ float x_pos, y_pos, speed, direction;
 ArrayList<Asteroid> ast = new ArrayList<Asteroid>();
 //ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 Spaceship player1;
-Bullet[] bull = new Bullet[10];
-Asteroid[] asteroids= new Asteroid[10];
+//Bullet[] bull = new Bullet[10];
+//Asteroid[] asteroids= new Asteroid[10];
 Star[] starField = new Star[100];
 
+int astAmnt = 15;
 
 /*
   Track User keyboard input
@@ -43,8 +44,12 @@ public void setup() {
   }
   
   //initialize your asteroid array and fill it
-  for (int i =0; i<=asteroids.length-1; i++){
-    asteroids[i] = new Asteroid((float)Math.random()*1000, (float)Math.random() * 800, (float)Math.random()*5, (float)Math.random()*360);
+  //for (int i =0; i<=asteroids.length-1; i++){
+  //  asteroids[i] = new Asteroid((float)Math.random()*1000, (float)Math.random() * 800, (float)Math.random()*5, (float)Math.random()*360);
+  //}
+  
+  for(int i=0; i < astAmnt; i++){
+    ast.add(new Asteroid((float)Math.random()*1000, (float)Math.random() * 800, (float)Math.random()*5, (float)Math.random()*360));
   }
   
   //initialize ship
@@ -54,9 +59,9 @@ public void setup() {
   //Bullet b = new Bullet(x_pos, y_pos, 10, 10);
   //bullets.add(b);
  
-  for (int i = 0; i < bull.length; i++) {
-      bull[i] = new Bullet((float)width/2, (float)height/2, 0, 0);
-    }
+  //for (int i = 0; i < bull.length; i++) {
+  //    bull[i] = new Bullet((float)width/2, (float)height/2, 0, 0);
+  //  }
 }
 
 
@@ -72,24 +77,40 @@ public void draw() {
     starField[i].show();
     //starField[i].twinkle();
   }
-  
+  fill(255);
+  textSize(32); 
+  text("Lives:"+ player1.lives, 10, 30);
+  text("Score:"+ player1.score, 10, 70);
   
   //Check bullet collisions
   //TODO: Part III or IV - for not just leave this comment
 
   //TODO: Part II, Update each of the Asteroids internals
   checkOnAsteroids();
-  checkOnBullets(); 
+  checkOnBullets();
+  checkOnShip();
 
   //Check for asteroid collisions against other asteroids and alter course
   //TODO: Part III, for now keep this comment in place
 
   //Draw asteroids
   //TODO: Part II
-  for (int i =0; i<asteroids.length; i++){
-    asteroids[i].update();
-    asteroids[i].show();
-    asteroids[i].move();
+  for (int i =0; i<ast.size(); i++){
+    Asteroid a1 = (Asteroid)ast.get(i);
+    a1.update();
+    a1.show();
+    a1.move();
+  }
+  
+  if (ast.size() ==0){
+    fill(255);
+    textSize(50); 
+    text("Game Over You win", 300, 400);
+  }
+  if(player1.lives==0){
+    fill(255);
+    textSize(50);
+    text ("Game over you lost :(", 350, 400);
   }
 
   
@@ -110,7 +131,7 @@ public void draw() {
   }
   player1.bounceOffWalls();
   
-
+  
   if(SPACE_BAR){
     player1.fired();
   }
@@ -206,10 +227,10 @@ void keyReleased() {
 
 
 void checkOnAsteroids(){
-  for (int i=0; i<asteroids.length; i++){
-    Asteroid a1 = asteroids[i];
-    for (int j = 0; j< asteroids.length; j++){
-      Asteroid a2 = asteroids[j];
+  for (int i=0; i<ast.size(); i++){
+    Asteroid a1 = ast.get(i);
+    for (int j = 0; j< ast.size(); j++){
+      Asteroid a2 = ast.get(j);
       if (i!=j && a1.collidingWith(a2) && a1.astRadius<0 && a2.astRadius<0){
         a1.direction = a1.direction+150;
         a2.direction = a2.direction-120;
@@ -219,16 +240,30 @@ void checkOnAsteroids(){
 }
 
 void checkOnBullets(){
-  for (int i=0; i<asteroids.length; i++){
-    Asteroid a1 = asteroids[i];
+  for (int i=0; i<ast.size(); i++){
+    Asteroid a1 = ast.get(i);
     for (int j=0; j<player1.bullHolder.size(); j++){
        if (j<player1.bulletWait){
-       Bullet b2 = player1.bullHolder.get(j);
-       if (b2.collidingWith(a1)){
-         player1.removed(j);
-         // ast.remove(i);
-       }
+         Bullet b2 = player1.bullHolder.get(j);
+         if (b2.collidingWith(a1)){
+           player1.removed(j);
+           //ast.remove(i);
+           ast.remove(i);   
+           player1.score++;
+         }
+         
       }
+    }
+  }
+}
+
+void checkOnShip(){
+  for(int i =0; i < ast.size(); i ++){
+    Asteroid a1 = ast.get(i);
+    if(a1.collidingWith(player1)){
+      player1.shipHit(player1);
+      player1.lives-=1;
+      ast.remove(i);
     }
   }
 }

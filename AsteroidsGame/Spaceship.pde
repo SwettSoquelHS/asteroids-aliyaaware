@@ -9,6 +9,8 @@ class Spaceship extends Mover {
   ArrayList<Bullet> bullHolder;
   int bulletWait;
   Bullet bullet; 
+  int score;
+  int lives;
   
   Spaceship(float x, float y){
     super(x,y);
@@ -18,6 +20,8 @@ class Spaceship extends Mover {
     super (x, y, speed, direction);
     bulletWait = 0;
     bullHolder = new ArrayList();
+    score = 0;
+    lives = 5;
   }
 
   void show(){
@@ -99,5 +103,10 @@ class Spaceship extends Mover {
     bullHolder.remove(bullet1);
     if(bulletWait>0)
       bulletWait-=1;
+  }
+  void shipHit(Spaceship ship){
+    ship.x = 500;
+    ship.y = 400;
+    ship.direction = 0;
   }
 }
