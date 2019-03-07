@@ -53,7 +53,7 @@ public void setup() {
   }
   
   //initialize ship
-  player1 = new Spaceship((float)width/2, (float)height/2, 0, 0);
+  player1 = new Spaceship((float)width/2, (float)height/2, 50, 0);
   
   //bullet array
   //Bullet b = new Bullet(x_pos, y_pos, 10, 10);
@@ -71,7 +71,18 @@ public void setup() {
 public void draw() {
   //your code here
   background(0);
-  
+  if (ast.size() ==0){
+    fill(255);
+    textSize(50); 
+    text("Game Over You win", 300, 400);
+  }
+  if(player1.lives==0){
+    fill(255);
+    textSize(50);
+    text ("Game over you lost :(", 350, 400);
+  }
+  if(player1.lives>0){
+
   //Draw Starfield first 
   for (int i =0; i<starField.length; i++){
     starField[i].show();
@@ -101,18 +112,6 @@ public void draw() {
     a1.show();
     a1.move();
   }
-  
-  if (ast.size() ==0){
-    fill(255);
-    textSize(50); 
-    text("Game Over You win", 300, 400);
-  }
-  if(player1.lives==0){
-    fill(255);
-    textSize(50);
-    text ("Game over you lost :(", 350, 400);
-  }
-
   
   //spaceship
   if(ROTATE_LEFT)
@@ -171,6 +170,7 @@ public void draw() {
       b.update();
     }
    }
+  }
   
   //TODO: Part IV - we will use a new feature in Java called an ArrayList, 
   //so for now we'll just leave this comment and come back to it in a bit. 

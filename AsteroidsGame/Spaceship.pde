@@ -19,6 +19,7 @@ class Spaceship extends Mover {
   public Spaceship(float x, float y, float speed, float direction) {
     super (x, y, speed, direction);
     bulletWait = 0;
+    radius = 30;
     bullHolder = new ArrayList();
     score = 0;
     lives = 5;

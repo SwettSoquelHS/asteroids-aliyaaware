@@ -6,7 +6,7 @@ class Asteroid extends Mover {
   
   public Asteroid(float x, float y, float speed, float direction){
     super(x, y, speed, direction);
-    radius  = 20;
+    radius  = 25;
     astRadius =0;
   }
   
@@ -61,7 +61,7 @@ class Asteroid extends Mover {
   void update(){
     x = x+ (float)Math.cos(radians(direction)*7);
     y = y + (float)Math.sin(radians(direction)*7);
-    rotate += 3;
+    rotate += 2;
     astRadius--;
   }
   

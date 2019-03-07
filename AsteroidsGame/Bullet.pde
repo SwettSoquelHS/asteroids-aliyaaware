@@ -3,6 +3,7 @@ class Bullet extends Spaceship {
   
   public Bullet(float x, float y, float speed, float direction){
     super(x, y, speed, direction);
+    radius = 10;
     x_pos = x;
     y_pos = y;
   }
